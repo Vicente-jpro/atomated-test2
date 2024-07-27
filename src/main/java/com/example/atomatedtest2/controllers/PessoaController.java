@@ -59,7 +59,6 @@ public class PessoaController {
 		
 	}
 	
-	
 	@GetMapping("/{id_pessoa}")
 	@ResponseStatus(HttpStatus.OK)
 	public PessoaDTO getPessoaDTOById(@PathVariable("id_pessoa") Long idPessoa) {
