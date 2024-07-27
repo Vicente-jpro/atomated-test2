@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -68,6 +69,17 @@ public class PessoaController {
 		
 		return pessoaDTO;
 	}
+	
+	@GetMapping("/search")
+	@ResponseStatus(HttpStatus.OK)
+	public PessoaDTO getPessoaByEmail(@RequestParam("email") String email) {
+		
+		Pessoa pessoaSaved =  pessoaService.getPessoaByEmail(email);
+		PessoaDTO pessoaDTO = modelMapper.map(pessoaSaved, PessoaDTO.class);
+		
+		return pessoaDTO;
+	}
+	
 	
 	@GetMapping()
 	@ResponseStatus(HttpStatus.OK)

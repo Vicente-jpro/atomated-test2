@@ -62,6 +62,19 @@ public class PessoaService {
 		
 	}
 	
+	public Pessoa getPessoaByEmail(String email) {
+		log.info("Getting pessoa by email: {}", email);
+		
+		try {
+			return pessoaRespository.findByEmail(email).get();
+		} catch (NoSuchElementException | NullPointerException e) {
+
+			log.error("Pessoa not found email: {}", email);
+			throw new PessoaException("Pessoa not found.");
+		}
+		
+	}
+	
 	public void delete(Long idPessoa) {
 		log.info("Deleting pessoa with ID: {}", idPessoa);
 		

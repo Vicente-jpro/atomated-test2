@@ -21,6 +21,14 @@ public class ApplicationControllerAdvice {
         String mensagemErro = ex.getMessage();
         return new ApiErrors(mensagemErro);
     }
+    
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiErrors handlePessoaException(NumberFormatException ex){
+        String mensagemErro = "Invalid URI "+ex.getMessage();
+        return new ApiErrors(mensagemErro);
+    }
+    
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
