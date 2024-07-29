@@ -88,6 +88,18 @@ class PessoaRepositoryTest {
 		assertNotNull(pessoa);
 	}
 	
+	@DisplayName("It should delete pessoa by id")
+	void it_should_delete_pessoa_by_id() {
+		Pessoa pessoaSalva = pessoaRespository.save(pessoa);
+		
+		pessoaRespository.delete(pessoaSalva);
+		
+		Pessoa pessoaOption = pessoaRespository.findById(pessoaSalva.getId()).get();
+		
+		assertNotNull(pessoaOption);
+		
+	}
+	
 	
 	@Test
 	@DisplayName("It should find by email.")
