@@ -23,8 +23,8 @@ public class PessoaService {
 	private final PessoaRespository pessoaRespository;
 	
 	public Pessoa salvar(Pessoa pessoa) {
-		log.info("Saving the pessoa...");
-		
+			log.info("Saving a pessoa...");
+
 		try {
 			return pessoaRespository.save(pessoa);
 		} catch (Exception e) {
@@ -36,7 +36,7 @@ public class PessoaService {
 	}
 	
 	public Pessoa update(Pessoa pessoa, Long idPessoa) {
-		log.info("Updating the pessoa...");		
+		log.info("Updating the pessoa with id: {} ...", idPessoa);		
 		
 		Pessoa pessoaSalvo = getPessoaById(idPessoa);
 		pessoa.setId(pessoaSalvo.getId());
@@ -66,7 +66,7 @@ public class PessoaService {
 		
 		try {
 			return pessoaRespository.findById(idPessoa).get();
-		} catch (NoSuchElementException e) {
+		} catch (Exception e) {
 
 			log.error("Pessoa not found ID: {}", idPessoa);
 			throw new PessoaException("Pessoa not found.");
