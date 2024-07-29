@@ -44,6 +44,18 @@ public class PessoaService {
 		return this.salvar(pessoa);
 	}
 	
+	public Pessoa findByNameAndEmail(String name, String email) {
+	log.info("Getting pessoa with name: {} and email: {}, not found",name, email);		
+		try {
+			return pessoaRespository.findByJPQL(name, email);
+		} catch (NoSuchElementException e) {
+
+			log.error("Pessoa with name: {} and email: {}, not found",name, email);
+			throw new PessoaException("Pessoa not found.");
+		}
+		 
+	}
+	
 	public List<Pessoa> getPessoas(){
 		log.info("Listing all Pessoas...");	
 		return this.pessoaRespository.findAll();

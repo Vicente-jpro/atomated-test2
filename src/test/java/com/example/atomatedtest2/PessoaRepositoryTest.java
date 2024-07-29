@@ -22,6 +22,11 @@ class PessoaRepositoryTest {
 
 	Pessoa pessoa, pessoa2;
 	
+
+	Pessoa pessoaSalva;
+
+	Pessoa pessoaSalva2;
+	
 	@Autowired
 	private PessoaRespository pessoaRespository;
 	
@@ -36,13 +41,17 @@ class PessoaRepositoryTest {
 				.name("Luisa Anibal")
 				.email("luisa@gmail.com")
 				.build();
+		
+
+		pessoaSalva = pessoaRespository.save(pessoa);
+
+		pessoaSalva2 = pessoaRespository.save(pessoa2);
 	}
 	
 	@Test
 	@DisplayName("It should save and return a Pessoa.")
 	void It_should_save_and_return_pessoa() {
 			
-		Pessoa pessoaSalva = pessoaRespository.save(pessoa);
 		assertNotNull(pessoaSalva);
 	}
 	
@@ -50,8 +59,6 @@ class PessoaRepositoryTest {
 	@DisplayName("It should update and return a Pessoa.")
 	void It_should_update_and_return_pessoa() {
 			
-		Pessoa pessoaSalva = pessoaRespository.save(pessoa);
-		
 		pessoaSalva.setEmail("madalena@gmail.com");
 		pessoaSalva.setName("Madalena");
 		Pessoa pessoaUpdated = pessoaRespository.save(pessoaSalva);
@@ -68,9 +75,6 @@ class PessoaRepositoryTest {
 	@DisplayName("It should find all pessoas.")
 	void it_should_find_all_pessoa() {
 
-		pessoaRespository.save(pessoa);
-		pessoaRespository.save(pessoa2);
-		
 		List<Pessoa> pessoas = pessoaRespository.findAll();
 		int expected = 2;
 		
@@ -80,17 +84,21 @@ class PessoaRepositoryTest {
 	@Test
 	@DisplayName("It should find a pessoa by ID.")
 	void it_should_find_pessoa_by_id() {
-
-
-		pessoaRespository.save(pessoa);
 		
 		Optional<Pessoa> pessoa = pessoaRespository.findById(1L);
 		assertNotNull(pessoa);
 	}
 	
+	@Test
+	@DisplayName("It should find a pessoa with name and email.")
+	void it_should_find_a_pessoa_with_name_and_email() {
+
+		Pessoa pessoaB = pessoaRespository.findByJPQL(pessoaSalva.getName(), pessoaSalva.getEmail());
+		assertNotNull(pessoaB);
+	}
+	
 	@DisplayName("It should delete pessoa by id")
 	void it_should_delete_pessoa_by_id() {
-		Pessoa pessoaSalva = pessoaRespository.save(pessoa);
 		
 		pessoaRespository.delete(pessoaSalva);
 		
