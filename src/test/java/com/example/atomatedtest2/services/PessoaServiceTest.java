@@ -1,7 +1,6 @@
 package com.example.atomatedtest2.services;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
@@ -10,7 +9,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -165,6 +163,26 @@ public class PessoaServiceTest {
 		
 	}
 	
+	
+
+	@Test
+	@DisplayName("It should delete a pessoa by id.")
+	void it_should_delete_pessoa() {
+
+		when(pessoaRepository.save(pessoa))
+			.thenReturn(pessoaSalva);
+		
+		when(pessoaRepository.findById(1L))
+		.thenReturn(Optional.of(pessoaSalva));
+
+		Pessoa ps = pessoaService.salvar(pessoa);
+		
+		
+		Pessoa pessoaEcontrada = pessoaService.getPessoaById(ps.getId());
+		pessoaService.delete(pessoaEcontrada.getId());
+		
+
+	}
 	
 	
 	
