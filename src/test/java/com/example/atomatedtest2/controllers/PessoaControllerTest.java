@@ -80,19 +80,15 @@ public class PessoaControllerTest {
 		when(modelMapper.map(pessoaDTO, Pessoa.class))
 		.thenReturn(pessoaSalva);
 
-		given( 
-				pessoaService.salvar(any(Pessoa.class))
-			).willAnswer( 
-					(invocation) -> invocation.getArgument(0) 
-				);
-
+		given( pessoaService.salvar(any(Pessoa.class)))
+			.willAnswer( (invocation) -> invocation.getArgument(0) );
+		
 		given(modelMapper.map(pessoaDTO, Pessoa.class))
 		.willReturn(pessoaSalva);
 		
 		given(modelMapper.map(pessoaSalva, PessoaDTO.class))
 			.willReturn(pessoaSalvaDTO);
-		
-		
+
 		Pessoa pessoa = modelMapper.map(pessoaDTO, Pessoa.class);  
 		
 		ResultActions response = mockMvc.perform(
