@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.atomatedtest2.configs.TestConfig;
 import com.example.atomatedtest2.integration.containers.AbstractIntegrationTest;
 
-@WebIntegrationTest
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class SwaggerIntegrationTest extends AbstractIntegrationTest{
    
