@@ -14,6 +14,11 @@ services:
   app:
     image: vicentesimao/atomated-test2:latest
     restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/test_integracao
       SPRING_DATASOURCE_USERNAME: postgres
@@ -28,4 +33,3 @@ services:
 networks:
   net-vicente: 
     driver: bridge
-	    
