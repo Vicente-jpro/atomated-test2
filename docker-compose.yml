@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: test_integracao
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: vicente0301
+    ports:
+      - "5432:5432"
+    networks:
+      - net-vicente
+
+  app:
+    image: vicentesimao/atomated-test2:latest
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/test_integracao
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: vicente0301
+    ports:
+      - "8080:8080"
+    command: mvn spring-boot:run
+    depends_on:
+      - postgres
+    networks:
+      - net-vicente
+networks:
+  net-vicente: 
+    driver: bridge
+	    

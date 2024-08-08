@@ -1,5 +1,6 @@
 package com.example.atomatedtest2.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -58,7 +59,10 @@ public class PessoaService {
 	
 	public List<Pessoa> getPessoas(){
 		log.info("Listing all Pessoas...");	
+		
 		return this.pessoaRespository.findAll();
+		
+
 	}
 	
 	public Pessoa getPessoaById(Long idPessoa) {
