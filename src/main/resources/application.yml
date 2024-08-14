@@ -13,7 +13,7 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/test_integracao
+    url: jdbc:postgresql://db-automated-test.cpes6o66cmzs.eu-west-1.rds.amazonaws.com/test_integracao
     username: postgres
     password: vicente0301
     driver-class-name: org.postgresql.Driver
