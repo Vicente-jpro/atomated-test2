@@ -67,16 +67,15 @@ public class PessoaService {
 	public Pessoa getPessoaById(Long idPessoa) {
 		log.info("Getting pessoa with ID: {}", idPessoa);
 		
-		try {
 			Pessoa pessoa = 
 					pessoaRespository.findById(idPessoa)
 									 .isPresent() ? pessoaRespository.findById(idPessoa).get(): null; 
-			return pessoa;
-		} catch (Exception e) {
-
+			if (pessoa != null)
+				return pessoa;
+			
 			log.error("Pessoa not found ID: {}", idPessoa);
 			throw new PessoaException("Pessoa not found.");
-		}
+		
 		
 	}
 	

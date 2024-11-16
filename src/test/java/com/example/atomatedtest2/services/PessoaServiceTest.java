@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.aopalliance.intercept.Invocation;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -53,7 +55,22 @@ public class PessoaServiceTest {
 				.build();
 		
 	}
+	
+	@Test
+	@DisplayName("It should run exception if a person was not found.")
+	void it_should_run_an_exception_if_a_person_was_not_found() throws PessoaException {
 		
+		Pessoa ps = pessoaService.salvar(pessoa);
+
+		when(pessoaRepository.findById(5L))
+		.thenReturn(Optional.empty());
+		
+		assertThrows(PessoaException.class, ()->{
+			pessoaSalva = pessoaService.getPessoaById(5L);
+		});
+		
+		String h = "This is a";
+	}
 	
 	@Test
 	@DisplayName("It should save a person.")
@@ -109,5 +126,7 @@ public class PessoaServiceTest {
 		
 		assertEquals(expected_name, pessoa2.getName());
 	}
+	
+
 
 }
