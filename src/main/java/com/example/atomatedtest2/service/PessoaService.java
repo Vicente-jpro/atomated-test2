@@ -1,6 +1,5 @@
 package com.example.atomatedtest2.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.atomatedtest2.entities.Pessoa;
 import com.example.atomatedtest2.exceptions.PessoaException;
-import com.example.atomatedtest2.repositories.PessoaRespository;
+import com.example.atomatedtest2.repositories.PessoaRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class PessoaService {
 
-	private final PessoaRespository pessoaRespository;
+	private final PessoaRepository pessoaRespository;
 	
 	public Pessoa salvar(Pessoa pessoa) {
 			log.info("Saving a pessoa...");
@@ -69,7 +68,10 @@ public class PessoaService {
 		log.info("Getting pessoa with ID: {}", idPessoa);
 		
 		try {
-			return pessoaRespository.findById(idPessoa).get();
+			Pessoa pessoa = 
+					pessoaRespository.findById(idPessoa)
+									 .isPresent() ? pessoaRespository.findById(idPessoa).get(): null; 
+			return pessoa;
 		} catch (Exception e) {
 
 			log.error("Pessoa not found ID: {}", idPessoa);

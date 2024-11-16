@@ -24,7 +24,7 @@ public class Pessoa {
 	@Column( name = "id")
 	private Long id;
 	
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", updatable = true, nullable = false)
 	private String name;
 	
 	@Column(name = "email", unique = true, nullable = false)
