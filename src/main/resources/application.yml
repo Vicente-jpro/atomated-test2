@@ -13,12 +13,29 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://db-automated-test.cpes6o66cmzs.eu-west-1.rds.amazonaws.com/test_integracao
+    url: jdbc:postgresql://localhost:5432/test_integracao
     username: postgres
     password: vicente0301
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
+
+
+#### Flyway config
+ # flyway:
+  #  url: jdbc:postgresql://localhost:5432/
+   # schemas:
+    #- test_integracao
+    #user: postgres
+    #password: vicente0301
+
+  flyway:
+    enabled: true  # Enable Flyway migrations
+    locations: classpath:db/migration  # Default location for migration scripts
+    baseline-on-migrate: true  # Handle existing schema
